@@ -21,18 +21,27 @@ const verificarResposta = (respostaEsperada, respostaUsuario) => {
 
 btn.addEventListener("click", () => {
   limparCaixa();
-  setTimeout(() => iniciarJogo(), 1000);
+  setTimeout(() => iniciarJogo(), 400);
 });
 
 const iniciarJogo = () => {
-  nomes = txtNomes.value.toLowerCase().split(" ");
+  const nomesInput = txtNomes.value.trim();
+  const nomesArray = nomesInput.split(" ");
+  
+  if (nomesArray.length < 5) {
+    alert("Insira pelo menos 5 nomes para iniciar o jogo.");
+    return;
+  }
+  
+  nomes = nomesArray.map(nome => nome.toLowerCase());
   pontos = 0;
   rodadaAtual = 1;
-  txtNomes.value = ""; 
+  txtNomes.value = "";
+  
   setTimeout(() => {
     alert("O jogo começou! Boa sorte.");
     jogarRodada();
-  }, 1000);
+  }, 400);
 };
 
 const jogarRodada = () => {
@@ -47,5 +56,10 @@ const jogarRodada = () => {
   rodadaAtual++;
   jogarRodada();
 };
+
+btn.addEventListener("click", () => {
+  limparCaixa();
+  iniciarJogo();
+});
 
 btn.addEventListener("click", iniciarJogo);
