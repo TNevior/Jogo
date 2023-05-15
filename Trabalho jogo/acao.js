@@ -5,6 +5,24 @@ let rodadaAtual = 1;
 const txtNomes = document.querySelector("#nomes");
 const btn = document.querySelector("#iniciar");
 
+var temporizador = document.getElementById("temporizador");
+
+var tempo = 30;
+
+function atualizar() {
+
+  temporizador.innerHTML = tempo;
+
+  tempo--;
+
+  if (tempo < 0) {
+    window.location.reload();
+    tempo = 30;
+  }
+}
+
+var intervalo = setInterval(atualizar, 1000);
+
 const verificarResposta = (respostaEsperada, respostaUsuario) => {
   if (respostaEsperada.toLowerCase() === respostaUsuario.toLowerCase()) {
     pontos++;
